@@ -7,7 +7,7 @@ function isObjectId(id) {
 
 async function getProjects(req, res) {
   try {
-    const projects = await Project.find().populate("tasks").lean();
+    const projects = await Project.find().populate("task").lean();
     res.status(200).json(projects).end();
   } catch (err) {
     res.status(400).json(err.message).end();
@@ -20,7 +20,7 @@ async function getProjectById(req, res) {
     if (!isObjectId(projectId)) {
       res.status(400).json("Id not valid").end();
     }
-    const project = await Project.findById(projectId).populate("tasks").lean();
+    const project = await Project.findById(projectId).populate("task").lean();
     res.status(200).json(project).end();
   } catch (err) {
     res.status(400).json(err.message).end();
